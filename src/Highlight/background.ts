@@ -7,15 +7,19 @@ chrome.runtime.onInstalled.addListener(() => {
 			title: "Highlight",
 			contexts: ["selection"],
 		},
-		() => {
-			chrome.tabs.query({ active: true, currentWindow: true }, (tabs: chrome.tabs.Tab[]) => {
-				chrome.tabs
-					.sendMessage(tabs[0].id!, { action: MessageAction.RENDER_HIGHLIGHTS })
-					.catch((err) => {
-						console.log(err);
-					});
-			});
-		},
+		() =>
+			(function () {
+				chrome.tabs.query(
+					{ active: true, currentWindow: true },
+					(tabs: chrome.tabs.Tab[]) => {
+						chrome.tabs
+							.sendMessage(tabs[0].id!, { action: MessageAction.RENDER_HIGHLIGHTS })
+							.catch((err) => {
+								console.log(err);
+							});
+					},
+				);
+			})(),
 	);
 
 	chrome.contextMenus.create(
@@ -24,14 +28,18 @@ chrome.runtime.onInstalled.addListener(() => {
 			title: "Remove Highlight",
 			contexts: ["selection"],
 		},
-		() => {
-			chrome.tabs.query({ active: true, currentWindow: true }, (tabs: chrome.tabs.Tab[]) => {
-				chrome.tabs
-					.sendMessage(tabs[0].id!, { action: MessageAction.REMOVE_HIGHLIGHTS })
-					.catch((err) => {
-						console.log(err);
-					});
-			});
-		},
+		() =>
+			(function () {
+				chrome.tabs.query(
+					{ active: true, currentWindow: true },
+					(tabs: chrome.tabs.Tab[]) => {
+						chrome.tabs
+							.sendMessage(tabs[0].id!, { action: MessageAction.REMOVE_HIGHLIGHTS })
+							.catch((err) => {
+								console.log(err);
+							});
+					},
+				);
+			})(),
 	);
 });
