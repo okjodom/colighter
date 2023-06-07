@@ -26,14 +26,6 @@ export interface MessageData<T> {
   data?: T;
 }
 
-export enum StorageKey {
-  SHOW_HIGHLIGHTS = 'SHOW_HIGHLIGHTS',
-  HIGHLIGHTING_COLOR = 'HIGHLIGHTING_COLOR',
-  COLOR_SELECTION = 'COLOR_SELECTION',
-  COLLAB_ID = 'COLLAB_ID',
-  COLLAB_HIGHLIGHTS = 'COLLAB_HIGHLIGHTS',
-}
-
 export interface IUser {
   userName: string;
   imageUrl: string;
