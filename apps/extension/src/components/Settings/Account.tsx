@@ -1,6 +1,4 @@
-import { PartialKeyPair } from 'nostrfn';
 import React from 'react';
-
 import { CheckCircleIcon, CopyIcon } from '@chakra-ui/icons';
 import {
   Flex,
@@ -16,6 +14,7 @@ import {
   Tr,
   useToast,
 } from '@chakra-ui/react';
+import { PartialKeyPair } from '../../types';
 
 type AccountProps = {
   nostrId: PartialKeyPair;

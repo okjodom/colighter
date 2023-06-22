@@ -1,6 +1,4 @@
-import { browserSourceNostrId, PartialKeyPair } from 'nostrfn';
 import React, { useCallback, useEffect, useState } from 'react';
-
 import { Box, Button, Flex, Image, Text } from '@chakra-ui/react';
 
 import Colighter from '../assets/colighter.svg';
@@ -8,7 +6,7 @@ import Gear from '../assets/gear.svg';
 import { useSettings } from '../context/settingsContext';
 import { useSidebar } from '../context/sidebarContext';
 import { theme } from '../theme';
-import { MessageAction } from '../types';
+import { MessageAction, PartialKeyPair } from '../types';
 import { handleSidebar, openExtensionSettings } from '../utils/Event';
 import { Highlights } from './Highlights';
 
@@ -18,16 +16,18 @@ export function Popup() {
   const [nostrId, setNostrId] = useState<PartialKeyPair | null>(null);
 
   const handleCreateNostrId = useCallback(async () => {
-    const newNostrId = await browserSourceNostrId();
-    if (!newNostrId) return;
-    localStorage.setItem('nostrKeys', JSON.stringify(newNostrId));
-    setNostrId(newNostrId);
+    const pubkey = await window.nostr?.getPublicKey();
+    if (!pubkey) return;
+
+    const nostrId = {
+      privkey: '',
+      pubkey,
+    };
+    setNostrId(nostrId);
+
     updateSettings({
       ...settings,
-      nostrId: {
-        privkey: newNostrId.privkey,
-        pubkey: newNostrId.pubkey,
-      },
+      nostrId,
     });
   }, [settings, updateSettings]);
 

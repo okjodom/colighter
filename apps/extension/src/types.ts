@@ -52,3 +52,13 @@ export interface IHighlight {
    */
   range?: string;
 }
+
+export interface KeyPair {
+  privkey: string;
+  pubkey: string;
+}
+
+export interface PartialKeyPair {
+  privkey: string | null;
+  pubkey: string;
+}

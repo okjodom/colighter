@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { PartialKeyPair } from 'nostrfn';
 import { getRelays } from '../utils/Relay';
+import { PartialKeyPair } from '../types';
 
 const defaultSettings = {
   highlightColor: '#FFD700',
